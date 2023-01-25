@@ -1,34 +1,42 @@
-from datetime import datetime
-import time
-import schedule
 from win10toast import ToastNotifier
-import threading
+from datetime import datetime
+import schedule
+import time
+
+anime = [1674638486]
+running = 0
 
 
-#currentTimestamp = 167419122
-#print(time.ctime(currentTimestamp))
-
-running = True
-def wsup():
+#method to send notification
+def notify(tag):
     global running
-    running = False
+    running += 1
     toaster = ToastNotifier()
-    toaster.show_toast("Wsup", "cock", duration=3)
-    print("you should see this at 9:45")
-    return schedule.CancelJob
+    toaster.show_toast("Anime Notification is airing in  minutes.", duration=10)
+    print("reached the end")
+    return schedule.cancel_job(tag)
 
+for i in range(len(anime)):
+    format = "%H:%M"
 
-#3 mins from now
-currentTimestamp = 1674193711
-format = "%H:%M"
-t = datetime.fromtimestamp(currentTimestamp)
-stopTimestamp = t.strftime(format)
+    threeMin = anime[i] - 180
+    t = datetime.fromtimestamp(threeMin)
+    stopTimestamp3min = t.strftime(format)
+    tag3 = "3min"
 
+    fiveMin = anime[i] - 300
+    p = datetime.fromtimestamp(fiveMin)
+    stopTimestamp5min = p.strftime(format)
+    tag5 = "5min"
 
+    print(stopTimestamp3min)
+    print(stopTimestamp5min)
 
-schedule.every().day.at(stopTimestamp).do(wsup)
-while running:
+    schedule.every().day.at(stopTimestamp3min).do(notify, tag = tag3).tag(tag3)
+    schedule.every().day.at(stopTimestamp5min).do(notify, tag = tag5).tag(tag5)
+
+    
+
+while running !=2:
     schedule.run_pending()
     time.sleep(1)
-
-print("end")

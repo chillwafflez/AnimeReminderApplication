@@ -56,3 +56,34 @@ def getNextEpisode(name_):
   #Make the HTTP Api request
   response = requests.post(url, json={'query': query, 'variables': variables})
   return response.json()
+
+
+#gets list of currently watching anime
+def getWatchList(username_):
+  query = '''
+  query($username: String) {
+  MediaListCollection (userName: $username, type: ANIME, status: CURRENT) {
+    lists {
+      entries {
+        media {
+          title {
+            english
+            native
+          }
+          status
+        }
+        progress
+      }
+    }
+  }
+}
+  '''
+
+  variables = {
+      "username": username_
+  }
+
+  url = 'https://graphql.anilist.co'
+  #Make the HTTP Api request
+  response = requests.post(url, json={'query': query, 'variables': variables})
+  return response.json()
