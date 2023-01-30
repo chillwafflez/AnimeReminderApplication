@@ -7,3 +7,5 @@ def convertToTimestamp(currentTimestamp):
     t = datetime.fromtimestamp(currentTimestamp)
     stopTimestamp = t.strftime(format)
     return stopTimestamp
+
+print(convertToTimestamp(1675057003))
