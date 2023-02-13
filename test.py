@@ -8,19 +8,27 @@ data = getWatchList("chillwafflez")
 #exp: this gets gurren lagann's status (finished)
 #print(data["data"]['MediaListCollection']['lists'][0].get('entries')[0].get('media').get('status'))
 
+print("wsup")
 
 animeListNAMES = []
 
-for i in range(len(data["data"]['MediaListCollection']['lists'][0].get('entries'))):
+def main():
+    #goes through "data" to find currently watching shows
+    for i in range(len(data["data"]['MediaListCollection']['lists'][0].get('entries'))):
 
-    if (data["data"]['MediaListCollection']['lists'][0].get('entries')[i].get('media').get('status') == 'RELEASING'):
-        animeListNAMES.append(data["data"]['MediaListCollection']['lists'][0].get('entries')[i].get('media').get('title').get('english'))
+        #if a show I am watching is currently releasing episodes, add it to list
+        if (data["data"]['MediaListCollection']['lists'][0].get('entries')[i].get('media').get('status') == 'RELEASING'):
+            animeListNAMES.append(data["data"]['MediaListCollection']['lists'][0].get('entries')[i].get('media').get('title').get('english'))
 
-for anime in animeListNAMES:
-    nextEp = getNextEpisode(anime)
-    print(nextEp["data"]["Media"]["nextAiringEpisode"]["airingAt"])
-    print(anime)
+    for anime in animeListNAMES:
+        nextEp = getNextEpisode(anime)
+        print(nextEp["data"]["Media"]["nextAiringEpisode"]["airingAt"])
+        print(anime)
 
-t = time.time()
-currentTimeSeconds = int(t)
-print(currentTimeSeconds)
+if __name__ == "__main__":
+    main()
+
+
+def rightBackAtYa():
+    main()
+

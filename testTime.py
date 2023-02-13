@@ -3,7 +3,7 @@ from datetime import datetime
 import schedule
 import time
 
-anime = [1674638486]
+anime = [1676281258]
 running = 0
 
 
@@ -36,7 +36,11 @@ for i in range(len(anime)):
     schedule.every().day.at(stopTimestamp5min).do(notify, tag = tag5).tag(tag5)
 
     
+all_jobs = schedule.get_jobs()
+print(all_jobs)
 
 while running !=2:
     schedule.run_pending()
     time.sleep(1)
+
+print("done!")
