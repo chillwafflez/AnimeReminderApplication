@@ -1,34 +1,32 @@
-from fetchMethods import *
+from win10toast import ToastNotifier
+from datetime import datetime
+from datetime import date
+import schedule
 import time
+from fetchMethods import *
 
-data = getWatchList("chillwafflez")
-#this gets gurren lagann's "media" fields/info
-#print(data["data"]['MediaListCollection']['lists'][0].get('entries')[0].get('media'))
-
-#exp: this gets gurren lagann's status (finished)
-#print(data["data"]['MediaListCollection']['lists'][0].get('entries')[0].get('media').get('status'))
-
-print("wsup")
 
 animeListNAMES = []
 
+def fuck_you():
+    print("fuck you")
+
+def meow():
+    print("meow")
+
 def main():
-    #goes through "data" to find currently watching shows
-    for i in range(len(data["data"]['MediaListCollection']['lists'][0].get('entries'))):
-
-        #if a show I am watching is currently releasing episodes, add it to list
-        if (data["data"]['MediaListCollection']['lists'][0].get('entries')[i].get('media').get('status') == 'RELEASING'):
-            animeListNAMES.append(data["data"]['MediaListCollection']['lists'][0].get('entries')[i].get('media').get('title').get('english'))
-
-    for anime in animeListNAMES:
-        nextEp = getNextEpisode(anime)
-        print(nextEp["data"]["Media"]["nextAiringEpisode"]["airingAt"])
-        print(anime)
+    schedule.every().day.at("00:00").do(fuck_you).tag('anime')
+    schedule.every().day.at("00:00").do(fuck_you).tag('anime')
+    schedule.every().day.at("00:00").do(meow)
 
 if __name__ == "__main__":
     main()
 
+print(schedule.get_jobs())
+schedule.clear('anime')
+print('got rid of anime jobs')
+print(schedule.get_jobs())
 
-def rightBackAtYa():
-    main()
+
+
 
