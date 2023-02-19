@@ -71,14 +71,18 @@ def setReminders() -> bool:
     
 def resetScheduler():
     schedule.clear('anime')
-    main()
+    remindersToday = setReminders()
+    if (remindersToday):
+        print("There are episodes airing today!")
+    else:
+        print("There are no episodes airing today")
 
 #executes once you run program. starts off with setting reminders and 
 def main():
     print("Starting program...")
     remindersToday = setReminders()
     if (remindersToday):
-        print("There are episodes airing today")
+        print("There are episodes airing today!")
     else:
         print("There are no episodes airing today")
     schedule.every().day.at("00:00").do(resetScheduler)
