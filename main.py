@@ -8,7 +8,10 @@ from fetchMethods import *
 #method to send Windows notification
 def notify(name, timeLeft):
     toaster = ToastNotifier()
-    toaster.show_toast(name + " is airing in " + timeLeft + " minutes.", duration=8)
+    if (timeLeft == "1"):
+        toaster.show_toast(name + " is airing in " + timeLeft + " hour.", duration=6)
+    if (timeLeft == "now"):
+        toaster.show_toast(name + " is airing now!", duration=6)
     print("reached the end")
     return schedule.CancelJob
 
@@ -77,7 +80,8 @@ def resetScheduler():
     else:
         print("There are no episodes airing today")
 
-#executes once you run program. starts off with setting reminders and 
+#executes once you run program. starts off with setting reminders and then sets a job that
+#runs at 12 am every day. this job clears all jobs and then reruns process
 def main():
     print("Starting program...")
     remindersToday = setReminders()
