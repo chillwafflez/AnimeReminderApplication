@@ -6,14 +6,17 @@ import time
 from fetchMethods import *
 
 
-def notify(name, timeLeft):
-    toaster = ToastNotifier()
-    if (timeLeft == "1"):
-        toaster.show_toast(name + " is airing in " + timeLeft + " hour.", duration=6)
-    if (timeLeft == "now"):
-        toaster.show_toast(name + " is airing now!", duration=6)
-    print("reached the end")
+#def notify(name, timeLeft):
+  #  toaster = ToastNotifier()
+   # if (timeLeft == "1"):
+   #     toaster.show_toast(name + " is airing in " + timeLeft + " hour.", duration=6)
+  #  if (timeLeft == "now"):
+  #      toaster.show_toast(name + " is airing now!", duration=6)
+  #  print("reached the end")
 
-notify("Vinland Saga", "now")
+#notify("Vinland Saga", "now")
 
-
+file = open("username.txt", "r+")
+username = file.readline()
+username = username[32:].strip()
+print(username)

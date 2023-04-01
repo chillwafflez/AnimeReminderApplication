@@ -15,7 +15,7 @@ def notify(name, timeLeft):
     print("reached the end")
     return schedule.CancelJob
 
-#sets jobs/reminders for 2 timestamps for each anime in my currently watching/releasing list
+#sets jobs/reminders for 2 timestamps for an anime in my currently watching/releasing list
 def setSchedule(name_):
     format = "%H:%M"
 
@@ -51,8 +51,11 @@ def setSchedule(name_):
 
 #this gets list of shows that are releasing episodes, and makes reminders for their next episode
 def setReminders() -> bool:
-    #get list of my currently watching anime (that is currently releasing episodes)
-    data = getWatchList("chillwafflez")
+    #get list of currently watching anime (that is currently releasing episodes) based on username
+    file = open("username.txt", "r+")
+    username = file.readline()
+    username = username[32:].strip()
+    data = getWatchList(username)
     releasingAnime = []
     for i in range(len(data["data"]['MediaListCollection']['lists'][0].get('entries'))):
 
@@ -81,7 +84,7 @@ def resetScheduler():
         print("There are no episodes airing today")
 
 #executes once you run program. starts off with setting reminders and then sets a job that
-#runs at 12 am every day. this job clears all jobs and then reruns process
+#runs at 12 am every day. this job calls resetScheduler which clears all jobs and then reruns process
 def main():
     print("Starting program...")
     remindersToday = setReminders()
